@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="col-md-8">
+		<h2>Key Code</h2>
+    <table>
+      <tr>
+        <td colspan="3"><input id="keycode" type="text" ng-model="vm.keycode"/></td>
+      </tr>
+      <tr>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('1')">1</button></td>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('2')">2</button></td>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('3')">3</button></td>
+      </tr>
+      <tr>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('4')">4</button></td>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('5')">5</button></td>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('6')">6</button></td>
+      </tr>
+      <tr>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('7')">7</button></td>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('8')">8</button></td>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('9')">9</button></td>
+      </tr>
+      <tr>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('*')">*</button></td>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('0')">0</button></td>
+        <td><button type="button" class="btn btn-primary" ng-click="vm.update('#')">#</button></td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <button type="button" class="btn btn-primary" ng-click="vm.submit()">Enter</button>
+          <button type="button" class="btn btn-secondary" ng-click="vm.clear()">Clear</button>
+        </td>
+      </tr>
+    </table>
+	</div>
+</div>

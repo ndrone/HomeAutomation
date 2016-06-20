@@ -1,0 +1,110 @@
+@import "./common/common.less";
+
+app p {
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  height:auto;
+}
+
+body {
+  margin-bottom: 50px;
+}
+
+body .container {
+  padding:0px 15px 0px 15px;
+}
+
+body .container h1 {
+  font-size:20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1345px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    width: 1660px;
+  }
+}
+
+.container {
+  margin-top:0px;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+h1.page-header {
+  font-size: 20px;
+  border-bottom:none;
+}
+
+h1.body-header {
+  margin-bottom: 10px;
+  line-height: 30px;
+  margin-top:10px;
+}
+
+.container h1.page-header {
+  margin-top:20px;
+}
+
+form .btn {
+  margin-top:10px;
+}
+
+.btn {
+  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, .3);
+}
+.btn.btn-secondary {
+  color:#FFFFFF;
+  background-color:#31b0d5;
+  border-color:#31b0d5;
+  margin-left:10px;
+}
+
+.clearFilter {
+  position:relative;
+}
+
+.clearFilter:after {
+    content:"";    /* required property */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 2px solid red;
+    height: 45%;    /* adjust as necessary, depending on line thickness */
+    /* or use calc() if you don't need to support IE8: */
+    height: calc(50% - 1px); /* 1px = half the line thickness */
+    width: 100%;
+    transform: rotateZ(-4deg);
+}
+
+.noMargin {
+  margin:0px;
+}
