@@ -5,7 +5,7 @@
 
 	<groupId>org.dronezone</groupId>
 	<artifactId>GarageDoorOpener-server</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>GarageDoorOpener Server Module</name>
@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.dronezone</groupId>
 		<artifactId>GarageDoorOpener-parent</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
@@ -53,8 +53,15 @@
 			<scope>test</scope>
 		</dependency>
         <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>spring-mock-mvc</artifactId>
+            <version>3.0.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

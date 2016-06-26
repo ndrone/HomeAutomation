@@ -43,8 +43,7 @@ public class KeyCodeRestController
             }
             catch (InterruptedException e)
             {
-                LOG.error(e.getMessage());
-                e.printStackTrace();
+                LOG.error(e.getMessage(), e);
             }
         }
         return new ResponseEntity<Object>(false, HttpStatus.BAD_REQUEST);
