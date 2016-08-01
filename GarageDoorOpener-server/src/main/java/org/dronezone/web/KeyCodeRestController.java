@@ -1,6 +1,5 @@
-package org.dronezone.keycode;
+package org.dronezone.web;
 
-import org.dronezone.garagedoor.GarageDoorProperties;
 import org.dronezone.garagedoor.GarageDoorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,40 +12,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Rest interface so that the user can submit a key code.
+ *
+ * @author Nicholas Drone
+ * @since 1.0
+ */
 @RestController
 public class KeyCodeRestController
 {
-    private static final Logger LOG = LoggerFactory.getLogger(KeyCodeRestController.class);
+    private static final Logger LOG = LoggerFactory
+        .getLogger(KeyCodeRestController.class);
 
-    private final String keycode;
     private final GarageDoorService garageDoorService;
 
     @Autowired
-    public KeyCodeRestController(GarageDoorProperties garageDoorProperties, GarageDoorService garageDoorService)
+    public KeyCodeRestController(GarageDoorService garageDoorService)
     {
-        this.keycode = garageDoorProperties.getKeycodeSecret();
         Assert.notNull(garageDoorService, "GarageDoorService can't be null");
         this.garageDoorService = garageDoorService;
     }
 
+    /**
+     * The url to where the client submits the key code to.
+     * @param requestingKeycode
+     * @return
+     */
     @RequestMapping(value = "/api/keycode/{requestingKeycode}", method = RequestMethod.POST)
     ResponseEntity<?> submit(@PathVariable String requestingKeycode)
     {
-        LOG.debug("keycode submitted: " + requestingKeycode);
-        LOG.debug("keycode checked against: " + keycode);
-        if (requestingKeycode.equals(keycode))
+        LOG.debug("web submitted: " + requestingKeycode);
+        try
         {
-            try
-            {
-                garageDoorService.doorOperation();
-                return new ResponseEntity<Object>(true, HttpStatus.OK);
-            }
-            catch (InterruptedException e)
-            {
-                LOG.error(e.getMessage(), e);
-            }
+            garageDoorService.doorOperation(requestingKeycode);
+            return new ResponseEntity<Object>(true, HttpStatus.OK);
         }
-        return new ResponseEntity<Object>(false, HttpStatus.BAD_REQUEST);
+        catch (Exception e)
+        {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(false, HttpStatus.BAD_REQUEST);
+        }
     }
-
 }

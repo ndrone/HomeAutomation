@@ -38,8 +38,8 @@
 //       expect(controller).to.have.property('name');
 //       expect(controller.name).to.equal('home');
 
-//       expect(controller).to.have.property('keycode');
-//       expect(controller.keycode).to.equal('');
+//       expect(controller).to.have.property('web');
+//       expect(controller.web).to.equal('');
 
 //       expect(controller).to.have.property('Rest');
 //       expect(controller.Rest).to.be.not.null;
@@ -52,33 +52,33 @@
 //     });
 
 //     it('checking update function', () => {
-//     	expect(controller.keycode).to.equal('');
+//     	expect(controller.web).to.equal('');
 //     	controller.update(1);
-//     	expect(controller.keycode).to.equal('1');
+//     	expect(controller.web).to.equal('1');
 //     });
 
 //     it('checking clear function', () => {
-//     	expect(controller.keycode).to.equal('');
+//     	expect(controller.web).to.equal('');
 //     	controller.update(1);
-//     	expect(controller.keycode).to.equal('1');
+//     	expect(controller.web).to.equal('1');
 //     	controller.clear();
-//     	expect(controller.keycode).to.equal('');
+//     	expect(controller.web).to.equal('');
 //     });
 
-//     it('checking submit with empty keycode', () => {
+//     it('checking submit with empty web', () => {
 //       controller.clear();
 //     	controller.submit();
-//     	expect(controller.keycode).to.equal('ERROR');
+//     	expect(controller.web).to.equal('ERROR');
 //     	// expect(homeServiceStub.calledOnce).to.be.false;
 //     });
 
-//     // it('checking submit with keycode equal 1', () => {
+//     // it('checking submit with web equal 1', () => {
 //     // 	homeServiceStub = sinon.sandbox.stub(homeService, 'submit', () => {
 //     // 		return true;
 //     // 	});
 //     //   controller.update('1');
 //     // 	controller.submit();
-//     // 	expect(controller.keycode).to.equal('1');
+//     // 	expect(controller.web).to.equal('1');
 //     // 	expect(homeServiceStub.calledOnce).to.be.true;
 //     // });
 // 	});

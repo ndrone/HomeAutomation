@@ -5,14 +5,9 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
-#server:
-  #context-path: /
-  #port: 8080
-# logging:
-  # level:
-    # org.dronezone.keycode: DEBUG
-    #org.springframework.security: DEBUG
 
-garage:
-  door:
-    keycode-secret: '0228'
+#garage:
+#  door:
+#    action-pin:  7
+#    action-pin-state: 1
+#    keycode-secret: '1234'

@@ -104,7 +104,7 @@ Some windows users and TeamCity Linux Agents are having failures building `node-
 1. `mvn clean install`
 
 ## File Structure
-We use a componentized approach. This will be the eventual standard (and particularly helpful, if using Angular's new router) as well as a great way to ensure a tasteful transition to Angular 2, when the time is ripe. Everything--or mostly everything, as we'll explore (below)--is a component. A component is a self-contained concern--may it be a feature or strictly-defined, ever-present element of the UI (such as a header, sidebar, or footer). Also characteristic of a component is that it harnesses its own stylesheets, templates, controllers, routes, services, and specs. This encapsulation allows us the comfort of isolation and structural locality. Here's how it looks:
+We use a component'ized approach. This will be the eventual standard (and particularly helpful, if using Angular's new router) as well as a great way to ensure a tasteful transition to Angular 2, when the time is ripe. Everything--or mostly everything, as we'll explore (below)--is a component. A component is a self-contained concern--may it be a feature or strictly-defined, ever-present element of the UI (such as a header, sidebar, or footer). Also characteristic of a component is that it harnesses its own stylesheets, templates, controllers, routes, services, and specs. This encapsulation allows us the comfort of isolation and structural locality. Here's how it looks:
 
 ```
 client
@@ -175,9 +175,9 @@ First of all if you havent already run this command
 npm config set save-exact=true
 ```
 
-If you don't define an explicit version npm i will install the latest.  This causes versions to potentionally change on every build.  To avoid this explicitly define a version.
+If you don't define an explicit version npm i will install the latest.  This causes versions to potentially change on every build.  To avoid this explicitly define a version.
 
-Now when you install you can specify a version explitly like so:
+Now when you install you can specify a version explicitly like so:
 
 ```
 npm install -S angular-locker@2.0.2
@@ -215,7 +215,7 @@ Or you can omit the version to use the latest, but because of the config command
 ### Using Aliases
 Sometimes you find yourself referencing locations frequently in your imports.  Webpack supports the concepts of aliases which can be defined in `webpack.config.js`
 
-Here are some we have predifined
+Here are some we have predefined
 
 ```
     alias: {
@@ -280,7 +280,7 @@ Here's a list of available tasks:
 ### Testing
 To run the tests, run `npm test` or `karma start`.  Note to use `karma start` you must have webpack and karma-cli installed globally.
 
-`Karma` combined with Webpack runs all files matching `*.spec.js` inside the `app` folder. This allows us to keep test files local to the component--which keeps us in good faith with continuing to build our app modularly. The file `spec.bundle.js` is the bundle file for **all** our spec files that Karma will run.
+`Karma` combined with Webpack runs all files matching `*.spec.js` inside the `app` folder. This allows us to keep test files local to the component--which keeps us in good faith with continuing to build our app modularity. The file `spec.bundle.js` is the bundle file for **all** our spec files that Karma will run.
 
 Be sure to define your `*.spec.js` files within their corresponding component directory. You must name the spec file like so, `[name].spec.js`. If you don't want to use the `.spec.js` suffix, you must change the `regex` in `spec.bundle.js` to look for whatever file(s) you want.
 `Mocha` is the testing suite and `Chai` is the assertion library (see `karma.conf.js`).
@@ -316,7 +316,7 @@ Following a consistent directory structure between components offers us the cert
 ⋅⋅⋅⋅⋅⋅⋅⋅componentName.spec.js // contains passing demonstration tests
 ```
 
-You may, of course, create these files manually, every time a new module is needed, but that gets quickly tedius.
+You may, of course, create these files manually, every time a new module is needed, but that gets quickly tedious.
 To generate a component, run `gulp component --name componentName`.
 
 The parameter following the `--name` flag is the name of the component to be created. Ensure that it is unique or it will overwrite the preexisting identically-named component.
@@ -335,7 +335,7 @@ If you name a component using a name that is a reserved html keyword such as hea
 Also please always make sure to run `npm test` to verify that your tests pass before you commit code.  The tests that are generated are meant to be updated to be more meaningful.
 
 ## Handling non-friendly modules
-Occasionaly you will run into a module that you install that will cause you issues.  One example we have been told about already is 'angular-locker'.  In this case the `package.json` points at a minified distribution which removes the ability to use certain workarounds. It also demonstrates the most common problem encounterd which is it does not export the module so webpack can properly handle it.  In cases like these try adding the path (relative to node_modules) to the minified distribution to the `deps` array in `webpack.config.js`.  This will essentially tell webpack not to parse it and add an alias to that distribution.
+Occasionally you will run into a module that you install that will cause you issues.  One example we have been told about already is 'angular-locker'.  In this case the `package.json` points at a minified distribution which removes the ability to use certain workarounds. It also demonstrates the most common problem encounterd which is it does not export the module so webpack can properly handle it.  In cases like these try adding the path (relative to node_modules) to the minified distribution to the `deps` array in `webpack.config.js`.  This will essentially tell webpack not to parse it and add an alias to that distribution.
 
 See `webpack.config.js` for the angular-locker example.
 
@@ -385,9 +385,9 @@ This can be done my modifying the `webpack-dev.config.js` and `webpack-dist.conf
 
 Note **to get the preminified version your must alias it that way at the bottom of the config file**.  It is not necessary to do this for every small dependency but if its is a larger libary it may be worth it.
 
-All of the kendo libararies as well as those listed above are already aliased to reference their minified versions and thus can just be added to the list without any additional alias being added.
+All of the kendo libraries as well as those listed above are already aliased to reference their minified versions and thus can just be added to the list without any additional alias being added.
 
-**Note:** By adding a dependency to this list it will be autmatically included in your bundle even if its not imported in any of your application files.  Therefore do not add dependencies to this list you are not using and if you remove a dependency from your project remove it from this list as well, to keep the file sizes smaller.
+**Note:** By adding a dependency to this list it will be automatically included in your bundle even if its not imported in any of your application files.  Therefore do not add dependencies to this list you are not using and if you remove a dependency from your project remove it from this list as well, to keep the file sizes smaller.
 
 ## Best Practices
 

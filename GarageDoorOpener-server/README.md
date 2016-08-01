@@ -1,10 +1,10 @@
-Angular Project
+Garage Door Server
 =================
 
 Environment Setup
 -----------------
 
-When you are working with this code locally, and using the spring profile "local". You
+When you are working with this code locally you
 will need to add the below to the program argument list.
 
 
