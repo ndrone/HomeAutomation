@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: GarageDoorOpener
+  cloud:
+    config:
+      uri: http://192.168.50.3:8888
