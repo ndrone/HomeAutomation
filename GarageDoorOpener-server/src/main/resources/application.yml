@@ -1,7 +1,5 @@
 ---
 spring:
-  application:
-    name: GarageDoorOpener
   output:
     ansi:
       enabled: ALWAYS
