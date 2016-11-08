@@ -1,5 +1,7 @@
 package org.dronezone.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -13,21 +15,30 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class WebConfiguration extends WebMvcConfigurerAdapter
 {
+    private static final Logger log = LoggerFactory.getLogger(WebConfiguration.class);
+
+    //one year
+    private static final Integer CACHE_PERIOD = 31536000;
+
+    private static final String[] NON_CACHE_PATHS = {"/index.html"};
+    private static final String[] CACHE_PATHS     = {"/**"};
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
+        log.info("adding resource handlers");
         super.addResourceHandlers(registry);
 
         String[] locations = new String[]{"classpath:static/"};
-        // Max cache period allowed
-        Integer cachePeriod = 31556926;
 
-        // prevent caching index.html, login.html, relogin.html
-        registry.addResourceHandler("/index.html").addResourceLocations(locations).setCachePeriod(0)
-                .resourceChain(true);
+        log.debug("preventing caching of these pathPatterns: {} for locations: {}", NON_CACHE_PATHS,
+                locations);
+        registry.addResourceHandler(NON_CACHE_PATHS).addResourceLocations(locations)
+                .setCachePeriod(0).resourceChain(true);
 
-        // Everything else cache for as long as possible if its not local
+        log.debug("setting pathPatterns: {} for locations: {} with a cache time: {} seconds",
+                CACHE_PATHS, locations, CACHE_PERIOD);
         registry.addResourceHandler("/**").addResourceLocations(locations)
-                .setCachePeriod(cachePeriod).resourceChain(true);
+                .setCachePeriod(CACHE_PERIOD).resourceChain(true);
     }
 }
