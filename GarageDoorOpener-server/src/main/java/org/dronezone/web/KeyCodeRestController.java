@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class KeyCodeRestController
 {
-    private static final Logger LOG = LoggerFactory
-        .getLogger(KeyCodeRestController.class);
+    private static final Logger log = LoggerFactory.getLogger(KeyCodeRestController.class);
 
     private final GarageDoorService garageDoorService;
 
@@ -35,22 +34,25 @@ public class KeyCodeRestController
 
     /**
      * The url to where the client submits the key code to.
+     *
      * @param requestingKeycode
      * @return
      */
     @RequestMapping(value = "/api/keycode/{requestingKeycode}", method = RequestMethod.POST)
     ResponseEntity<?> submit(@PathVariable String requestingKeycode)
     {
-        LOG.debug("web submitted: " + requestingKeycode);
+        log.info("request submitted for door operation");
+        log.debug("submitted with key code: {}", requestingKeycode);
         try
         {
             garageDoorService.doorOperation(requestingKeycode);
-            return new ResponseEntity<Object>(true, HttpStatus.OK);
         }
         catch (Exception e)
         {
-            LOG.error(e.getMessage(), e);
+            log.warn("Exception thrown while trying to interact with the garage door", e);
             return new ResponseEntity<Object>(false, HttpStatus.BAD_REQUEST);
         }
+        log.debug("No exception thrown so everything must be ok");
+        return new ResponseEntity<Object>(true, HttpStatus.OK);
     }
 }

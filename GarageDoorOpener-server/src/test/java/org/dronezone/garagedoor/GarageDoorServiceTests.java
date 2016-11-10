@@ -1,10 +1,6 @@
 package org.dronezone.garagedoor;
 
-import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
-import com.pi4j.io.gpio.PinPullResistance;
-import com.pi4j.io.gpio.PinState;
-import org.junit.Assert;
+import com.pi4j.io.gpio.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,10 +12,10 @@ import static org.mockito.Mockito.*;
 /**
  * @author Nicholas Drone
  */
-public class GarageDoorServiceTest
+public class GarageDoorServiceTests
 {
     private GarageDoorServiceImpl garageDoorService;
-    private GpioPinDigitalOutput gpioPinDigitalOutput;
+    private GpioPinDigitalOutput  gpioPinDigitalOutput;
 
     @Before
     public void setup()
@@ -27,18 +23,20 @@ public class GarageDoorServiceTest
         GpioController gpioController = mock(GpioController.class);
         gpioPinDigitalOutput = mock(GpioPinDigitalOutput.class);
         when(gpioController.provisionDigitalOutputPin(eq(GPIO_07), eq(HIGH)))
-            .thenReturn(gpioPinDigitalOutput);
+                .thenReturn(gpioPinDigitalOutput);
 
         GarageDoorProperties garageDoorProperties = new GarageDoorProperties();
         garageDoorProperties.setKeycodeSecret("1234");
         garageDoorProperties.setActionPin(7);
         garageDoorProperties.setActionPinState(PinState.HIGH);
-        garageDoorService = new GarageDoorServiceImpl(garageDoorProperties,
-            gpioController);
+        garageDoorService = new GarageDoorServiceImpl(garageDoorProperties, gpioController);
 
-        Assert.assertNotNull(gpioPinDigitalOutput);
         verify(gpioPinDigitalOutput, times(1))
-            .setShutdownOptions(eq(true), eq(PinState.HIGH), eq(PinPullResistance.OFF));
+                .setShutdownOptions(eq(true), eq(PinState.HIGH), eq(PinPullResistance.OFF));
+
+        when(gpioPinDigitalOutput.getPin()).thenReturn(mock(Pin.class));
+        when(gpioPinDigitalOutput.getState()).thenReturn(PinState.HIGH).thenReturn(PinState.LOW)
+                .thenReturn(PinState.LOW).thenReturn(PinState.HIGH);
     }
 
     @Test

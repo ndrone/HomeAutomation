@@ -1,0 +1,67 @@
+= Garage Door Opener API Reference Guide
+Nicholas Drone;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[overview]]
+= Overview
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+Garage Door Opener uses the following verbs trying to adhere as closely as possible to the standard HTTP and REST conventions.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+|===
+
+[[overview-http-status-code]]
+== HTTP status codes
+
+Garage Door uses the following HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed Successfully
+
+| `400 Bad Request`
+| The request was incorrect.
+
+| `404 Not Found`
+| The request resource doesn't exist
+
+| `500 Internal Server Error`
+| An unexplained error has occurred
+|===
+
+[[resources]]
+= Resources
+
+[[resources-garage-door]]
+== Garage Door Opener
+
+A `POST` request and the key code to match will operate the door and return a `200` if there is an error it will then throw a `400` error
+
+==== Example Request
+
+include::{snippets}/door-operation-valid/http-request.adoc[]
+
+==== Example Response Valid
+
+include::{snippets}/door-operation-valid/http-response.adoc[]
+
+==== Example Response Invalid
+
+include::{snippets}/door-operation-invalid/http-response.adoc[]

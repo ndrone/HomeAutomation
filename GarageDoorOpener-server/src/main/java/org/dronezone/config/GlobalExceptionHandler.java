@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
 {
-    public static final Logger LOG = LoggerFactory
+    public static final Logger log = LoggerFactory
         .getLogger(GlobalExceptionHandler.class);
 
     /**
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e)
     {
-        LOG.error(" Unexpected Exception caught in GlobalExceptionHandler", e);
+        log.error(" Unexpected Exception caught in GlobalExceptionHandler", e);
         return new ResponseEntity<>(ErrorResponse
             .of(HttpStatus.INTERNAL_SERVER_ERROR, "servererror", e.getMessage()),
             HttpStatus.INTERNAL_SERVER_ERROR);

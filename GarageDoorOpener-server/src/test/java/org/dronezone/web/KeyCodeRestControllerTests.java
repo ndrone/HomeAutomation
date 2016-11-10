@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(KeyCodeRestController.class)
-public class KeyCodeRestControllerTest
+public class KeyCodeRestControllerTests
 {
     @Autowired
     private MockMvc mockMvc;
@@ -44,7 +44,7 @@ public class KeyCodeRestControllerTest
     {
         doThrow(Exception.class).when(garageDoorService).doorOperation("123");
 
-        mockMvc.perform(post("/api/keycode/123")).andExpect(status().is4xxClientError());
+        mockMvc.perform(post("/api/keycode/123")).andExpect(status().isBadRequest());
         verify(garageDoorService, times(1)).doorOperation("123");
     }
 }
