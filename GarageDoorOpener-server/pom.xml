@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>GarageDoorOpener-server</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>GarageDoorOpener Server Module</name>
@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.dronezone</groupId>
 		<artifactId>GarageDoorOpener-parent</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
+		<version>1.0.3</version>
 		<relativePath>../</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
