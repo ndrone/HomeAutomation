@@ -6,7 +6,7 @@
  * file for the Webpack tests. Similarly to how Webpack creates a
  * `bundle.js` file for the compressed app source files, when we
  * run our tests, Webpack, likewise, compiles and bundles those tests here.
-*/
+ */
 
 import jQuery from 'jquery';
 import angular from 'angular';

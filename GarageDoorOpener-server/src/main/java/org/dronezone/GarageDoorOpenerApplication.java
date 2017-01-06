@@ -12,9 +12,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-public class GarageDoorOpenerApplication {
+public class GarageDoorOpenerApplication
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SpringApplication.run(GarageDoorOpenerApplication.class, args);
     }
 }

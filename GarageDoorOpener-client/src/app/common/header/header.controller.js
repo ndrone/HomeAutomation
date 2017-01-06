@@ -1,8 +1,8 @@
 class HeaderController {
-  /*@ngInject*/
-	constructor(){
-		this.name = 'header';
-	}
+    /*@ngInject*/
+    constructor() {
+        this.name = 'header';
+    }
 }
 
 

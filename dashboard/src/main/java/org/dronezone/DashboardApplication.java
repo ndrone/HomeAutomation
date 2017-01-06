@@ -8,9 +8,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableAdminServer
 @EnableDiscoveryClient
 @SpringBootApplication
-public class DashboardApplication {
+public class DashboardApplication
+{
 
-	public static void main(String[] args) {
-		SpringApplication.run(DashboardApplication.class, args);
-	}
+    public static void main(String[] args)
+    {
+        SpringApplication.run(DashboardApplication.class, args);
+    }
 }

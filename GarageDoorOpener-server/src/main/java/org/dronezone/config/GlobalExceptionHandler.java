@@ -18,8 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
 {
-    public static final Logger log = LoggerFactory
-        .getLogger(GlobalExceptionHandler.class);
+    public static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * Catch all exception handler to return an error 500. You should really fix these
@@ -29,8 +28,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
     public ResponseEntity<ErrorResponse> handleException(Exception e)
     {
         log.error(" Unexpected Exception caught in GlobalExceptionHandler", e);
-        return new ResponseEntity(ErrorResponse
-            .of(HttpStatus.INTERNAL_SERVER_ERROR, "servererror", e.getMessage()),
-            HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(
+                ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, "servererror", e.getMessage()),
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

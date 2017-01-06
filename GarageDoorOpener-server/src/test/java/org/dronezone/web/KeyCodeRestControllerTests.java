@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class KeyCodeRestControllerTests
 {
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc           mockMvc;
     @MockBean
     private GarageDoorService garageDoorService;
 

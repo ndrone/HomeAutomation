@@ -12,40 +12,44 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 var devConfig = {
-  entry: {
-    app: [
-      './src/app/app.js'
+    entry: {
+        app: [
+            './src/app/app.js'
+        ],
+        vendor: ["jquery", "angular", "angular-ui-router", "angular-animate", "angular-ui-bootstrap", "angular-breadcrumb", "bootstrap", "lodash", "restangular"]
+    },
+    output: config.output,
+    externals: config.externals,
+    module: config.module,
+    devtool: config.devtool,
+    devServer: {
+        hot: true,
+        contentBase: "src",
+        // Set this if you want webpack-dev-server to delegate a single path to an arbitrary server.
+        // Use "*" to proxy all paths to the specified server.
+        // This is useful if you want to get rid of 'http://localhost:8080/' in script[src],
+        // and has many other use cases (see https://github.com/webpack/webpack-dev-server/pull/127 ).
+        proxy: {
+            "/api/*": "http://localhost:8080"
+        }
+    },
+    plugins: [
+
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'scripts/vendor.bundle.js'),
+
+        // Generate the index.html file from a template, add a cache-busting hash to the bundle.css and bundle.js files
+        new HtmlWebpackPlugin({
+            template: './src/index.tmpl.html',
+            hash: true,
+            inject: 'body'
+        })
     ],
-    vendor: ["jquery", "angular", "angular-ui-router", "angular-animate", "angular-ui-bootstrap", "angular-breadcrumb", "bootstrap", "lodash", "restangular"]
-  },
-  output: config.output,
-  externals: config.externals,
-  module: config.module,
-  devtool: config.devtool,
-  devServer: {
-    hot: true,
-    contentBase: "src",
-    // Set this if you want webpack-dev-server to delegate a single path to an arbitrary server.
-    // Use "*" to proxy all paths to the specified server.
-    // This is useful if you want to get rid of 'http://localhost:8080/' in script[src],
-    // and has many other use cases (see https://github.com/webpack/webpack-dev-server/pull/127 ).
-    proxy: {
-      "/api/*": "http://localhost:8080"
-    }
-  },
-  plugins: [
-
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'scripts/vendor.bundle.js'),
-
-    // Generate the index.html file from a template, add a cache-busting hash to the bundle.css and bundle.js files
-    new HtmlWebpackPlugin({
-      template: './src/index.tmpl.html',
-      hash: true,
-      inject: 'body'
-    })
-  ],
-  resolve: config.resolve
+    resolve: config.resolve
 };
 //only do ng-annotate on dev/dist builds don't want this behavior for tests where we do our own mocking/injection
-devConfig.module.loaders.push({ test: /\.js$/, exclude: /(node_modules|vendor)/, loader: 'ng-annotate!babel' });
+devConfig.module.loaders.push({
+    test: /\.js$/,
+    exclude: /(node_modules|vendor)/,
+    loader: 'ng-annotate!babel'
+});
 module.exports = devConfig;

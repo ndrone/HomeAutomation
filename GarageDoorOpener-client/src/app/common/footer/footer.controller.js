@@ -1,9 +1,9 @@
 class FooterController {
-	/*@ngInject*/
-	constructor(){
-		this.name = 'footer';
-		this.year = new Date();
-	}
+    /*@ngInject*/
+    constructor() {
+        this.name = 'footer';
+        this.year = new Date();
+    }
 }
 
 
