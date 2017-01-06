@@ -1,4 +1,4 @@
-Home Automation
+Home Automation [![Build Status](https://travis-ci.org/ndrone/HomeAutomation.svg?branch=develop)](https://travis-ci.org/ndrone/HomeAutomation)
 ======
 
 Home Automation is a multi module project using several cloud projects, and other technologies, AngularJS, Spring Boot and more to come. Most of these projects are hosted on my Raspberry Pi's.
