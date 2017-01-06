@@ -23,19 +23,14 @@ class HomeController {
         } else {
             let requestingKeyCode = this.keycode;
             this.keycode = "WAIT";
-            this.Rest.one("api/keycode", requestingKeyCode).post().then(() = > {
+            this.Rest.one("api/keycode", requestingKeyCode).post().then(() => {
                 this.keycode = "OPENING";
-        }).
-            catch(() = > {
-                this.keycode = "ERROR";
-        })
-            ;
-            this.timeoutPromise = this.timeout(() = > {
-                this.keycode = "";
-        },
-            5000
-        )
-            ;
+            }).catch(() => {
+                    this.keycode = "ERROR";
+            });
+            this.timeoutPromise = this.timeout(() => {
+                    this.keycode = "";
+                }, 5000);
         }
     }
 }

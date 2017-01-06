@@ -6,11 +6,10 @@ class TemplateTestUtil {
     renderTemplate(templateToRender, controllerViewModelName, options) {
         let compiledTemplate, compile, scope;
 
-        inject(($compile, $rootScope) = > {
+        inject(($compile, $rootScope) => {
             compile = $compile;
         scope = $rootScope;
-    })
-        ;
+    });
 
         if (scope !== undefined && compile !== undefined) {
             scope[controllerViewModelName] = options;

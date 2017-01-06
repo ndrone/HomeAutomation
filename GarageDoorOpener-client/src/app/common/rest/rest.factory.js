@@ -2,10 +2,9 @@ class Rest {
     constructor(Restangular, $rootScope, $log) {
         Object.assign(this, {Restangular, $rootScope, $log});
 
-        return Restangular.withConfig((RestangularConfigurer) = > {
+        return Restangular.withConfig((RestangularConfigurer) => {
                 RestangularConfigurer.setBaseUrl(window.location.href.substring(0, window.location.href));
-    })
-        ;
+    });
     }
 
     static restFactory(Restangular, $rootScope, $log) {
