@@ -1,3 +1,20 @@
+notifications:
+  email:
+    - ndrone@gmail.com
+
 language: java
 
-mvn clean test sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=90ab92190cc8da8765d730a869b3eb4d6e837fd6
+mvn clean test
+
+addons:
+  sonarqube:
+    token:
+      secure: 90ab92190cc8da8765d730a869b3eb4d6e837fd6 # encrypted value of your token
+    github_token:
+          secure: bcbf0e6ed42b0cc6062d33586a63ad453bec80fb
+  branches:
+      - master
+      - develop
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
