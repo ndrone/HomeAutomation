@@ -1,4 +1,4 @@
-Home Automation [![Build Status](https://travis-ci.org/ndrone/HomeAutomation.svg?branch=develop)](https://travis-ci.org/ndrone/HomeAutomation)
+Home Automation [![Build Status](https://travis-ci.org/ndrone/HomeAutomation.svg?branch=develop)](https://travis-ci.org/ndrone/HomeAutomation) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8a331e855a0d40e88f7631cdfdb59920)](https://www.codacy.com/app/ndrone/HomeAutomation?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ndrone/HomeAutomation&amp;utm_campaign=Badge_Grade)
 ======
 
 Home Automation is a multi module project using several cloud projects, and other technologies, AngularJS, Spring Boot and more to come. Most of these projects are hosted on my Raspberry Pi's.
