@@ -29,7 +29,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
     public ResponseEntity<ErrorResponse> handleException(Exception e)
     {
         log.error(" Unexpected Exception caught in GlobalExceptionHandler", e);
-        return new ResponseEntity<>(ErrorResponse
+        return new ResponseEntity(ErrorResponse
             .of(HttpStatus.INTERNAL_SERVER_ERROR, "servererror", e.getMessage()),
             HttpStatus.INTERNAL_SERVER_ERROR);
     }
