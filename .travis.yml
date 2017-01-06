@@ -14,4 +14,4 @@ addons:
   - master
   - develop
 script:
-- mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
+- mvn org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar
