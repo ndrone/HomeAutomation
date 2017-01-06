@@ -4,8 +4,6 @@ notifications:
 
 language: java
 
-mvn clean test -B
-
 addons:
   sonarqube:
     token:
