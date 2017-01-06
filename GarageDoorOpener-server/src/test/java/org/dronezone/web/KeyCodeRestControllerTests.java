@@ -27,7 +27,7 @@ public class KeyCodeRestControllerTests
     private GarageDoorService garageDoorService;
 
     @Before
-    public void setup()
+    public void setUp()
     {
         reset(garageDoorService);
     }

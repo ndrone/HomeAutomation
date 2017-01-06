@@ -43,6 +43,7 @@ public class KeyCodeRestController
     {
         log.info("request submitted for door operation");
         log.debug("submitted with key code: {}", requestingKeycode);
+        ResponseEntity<Object> responseEntity = new ResponseEntity<Object>(true, HttpStatus.OK);
         try
         {
             garageDoorService.doorOperation(requestingKeycode);
@@ -50,9 +51,9 @@ public class KeyCodeRestController
         catch (Exception e)
         {
             log.warn("Exception thrown while trying to interact with the garage door", e);
-            return new ResponseEntity<Object>(false, HttpStatus.BAD_REQUEST);
+            responseEntity = new ResponseEntity<Object>(false, HttpStatus.BAD_REQUEST);
         }
         log.debug("No exception thrown so everything must be ok");
-        return new ResponseEntity<Object>(true, HttpStatus.OK);
+        return responseEntity;
     }
 }

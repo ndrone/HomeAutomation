@@ -1,6 +1,6 @@
 package org.dronezone.web;
 
-import org.dronezone.Documentation;
+import org.dronezone.AbstractDocumentation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -13,10 +13,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by nd26434 on 11/7/2016.
  */
-public class KeyCodeRestDocumentation extends Documentation
+public class KeyCodeRestDocumentation extends AbstractDocumentation
 {
     @Before
-    public void setup()
+    public void setUp()
     {
         Mockito.reset(garageDoorService);
     }

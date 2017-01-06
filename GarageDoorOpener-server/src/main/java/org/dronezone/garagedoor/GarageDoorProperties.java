@@ -12,6 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "garage.door")
 public class GarageDoorProperties
 {
+    public static final int DEFAULT_PIN = 7;
     /**
      * Key code that the client should be challenged against.
      * <STRONG>NOTE:</STRONG> This should be changed in the environment. Spring boot
@@ -22,7 +23,7 @@ public class GarageDoorProperties
     /**
      * Pin the garage door is connected to. That provided the signal to open
      */
-    private int actionPin = 7;
+    private int actionPin = DEFAULT_PIN;
 
     /**
      * The rest or default state the pin should be in.
