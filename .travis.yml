@@ -5,3 +5,14 @@ notifications:
 language: java
 jdk:
 - oraclejdk8
+
+sudo: required
+before_install:
+  - curl http://www.jpm4j.org/install/script > jpmInstall.sh
+  - sudo sh jpmInstall.sh
+  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
+
+script: mvn clean post-integration-test -B
+
+after_success:
+  - codacy-coverage-reporter -l Java -r /home/travis/build/ndrone/HomeAutomation/target/site/cobertura/coverage.xml

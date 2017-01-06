@@ -38,7 +38,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter
 
         log.debug("setting pathPatterns: {} for locations: {} with a cache time: {} seconds",
                 CACHE_PATHS, locations, CACHE_PERIOD);
-        registry.addResourceHandler("/**").addResourceLocations(locations)
+        registry.addResourceHandler(CACHE_PATHS).addResourceLocations(locations)
                 .setCachePeriod(CACHE_PERIOD).resourceChain(true);
     }
 }

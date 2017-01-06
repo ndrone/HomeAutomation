@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.dronezone</groupId>
-	<artifactId>HomeAutomation</artifactId>
-    <version>${project.version}</version>
-	<packaging>pom</packaging>
+    <groupId>org.dronezone</groupId>
+    <artifactId>HomeAutomation</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-	<name>Home Automation</name>
-	<description>Project for all my home automation projects, and microservices</description>
+    <name>Home Automation</name>
+    <description>Project for all my home automation projects, and microservices</description>
 
-	<developers>
-		<developer>
-			<id>ndrone</id>
-			<name>Nicholas Drone</name>
-			<email>ndrone at gmail.com</email>
-			<roles>
-				<role>Project lead</role>
-			</roles>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <id>ndrone</id>
+            <name>Nicholas Drone</name>
+            <email>ndrone at gmail.com</email>
+            <roles>
+                <role>Project lead</role>
+            </roles>
+        </developer>
+    </developers>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <spring-boot.version>1.4.3.RELEASE</spring-boot.version>
         <spring-cloud.version>Camden.SR3</spring-cloud.version>
-        <project.version>1.1.0-SNAPSHOT</project.version>
-	</properties>
+    </properties>
 
-	<modules>
+    <modules>
         <module>config-server</module>
         <module>dashboard</module>
         <module>eureka-server</module>
-		<module>GarageDoorOpener-client</module>
-		<module>GarageDoorOpener-server</module>
-	</modules>
+        <module>GarageDoorOpener-client</module>
+        <module>GarageDoorOpener-server</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>
@@ -60,6 +62,38 @@
     </dependencyManagement>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <check>
+                        <branchRate>85</branchRate>
+                        <lineRate>85</lineRate>
+                        <haltOnFailure>false</haltOnFailure>
+                        <totalBranchRate>85</totalBranchRate>
+                        <totalLineRate>85</totalLineRate>
+                        <packageLineRate>85</packageLineRate>
+                        <packageBranchRate>85</packageBranchRate>
+                    </check>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                    <aggregate>true</aggregate>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>check</goal>
+                            <goal>cobertura</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -100,5 +134,22 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>cobertura</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>

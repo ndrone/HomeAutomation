@@ -1,62 +1,69 @@
 package org.dronezone.garagedoor;
 
 import com.pi4j.io.gpio.*;
+import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static com.pi4j.io.gpio.PinState.HIGH;
-import static com.pi4j.io.gpio.RaspiPin.GPIO_07;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
 
 /**
  * @author Nicholas Drone
  */
 public class GarageDoorServiceTests
 {
+    private static final int    ACTION_PIN           = 7;
+    private static final String GOOD_KEYCODE         = "1234";
+    private static final String BAD_KEY_CODE_ENTERED = "Bad KeyCode Entered.";
+
     private GarageDoorServiceImpl garageDoorService;
     private GpioPinDigitalOutput  gpioPinDigitalOutput;
 
     @Before
-    public void setup()
+    public void setUp()
     {
-        GpioController gpioController = mock(GpioController.class);
-        gpioPinDigitalOutput = mock(GpioPinDigitalOutput.class);
-        when(gpioController.provisionDigitalOutputPin(eq(GPIO_07), eq(HIGH)))
-                .thenReturn(gpioPinDigitalOutput);
+        GpioController gpioController = Mockito.mock(GpioController.class);
+        gpioPinDigitalOutput = Mockito.mock(GpioPinDigitalOutput.class);
+        Mockito.when(gpioController.provisionDigitalOutputPin(Matchers.eq(RaspiPin.GPIO_07),
+                Matchers.eq(PinState.HIGH))).thenReturn(gpioPinDigitalOutput);
 
         GarageDoorProperties garageDoorProperties = new GarageDoorProperties();
-        garageDoorProperties.setKeycodeSecret("1234");
-        garageDoorProperties.setActionPin(7);
+        garageDoorProperties.setKeycodeSecret(GOOD_KEYCODE);
+        garageDoorProperties.setActionPin(ACTION_PIN);
         garageDoorProperties.setActionPinState(PinState.HIGH);
         garageDoorService = new GarageDoorServiceImpl(garageDoorProperties, gpioController);
 
-        verify(gpioPinDigitalOutput, times(1))
-                .setShutdownOptions(eq(true), eq(PinState.HIGH), eq(PinPullResistance.OFF));
+        Mockito.verify(gpioPinDigitalOutput, Mockito.times(1))
+                .setShutdownOptions(Matchers.eq(true), Matchers.eq(PinState.HIGH),
+                        Matchers.eq(PinPullResistance.OFF));
 
-        when(gpioPinDigitalOutput.getPin()).thenReturn(mock(Pin.class));
-        when(gpioPinDigitalOutput.getState()).thenReturn(PinState.HIGH).thenReturn(PinState.LOW)
-                .thenReturn(PinState.LOW).thenReturn(PinState.HIGH);
+        Mockito.when(gpioPinDigitalOutput.getPin()).thenReturn(Mockito.mock(Pin.class));
+        Mockito.when(gpioPinDigitalOutput.getState()).thenReturn(PinState.HIGH)
+                .thenReturn(PinState.LOW).thenReturn(PinState.LOW).thenReturn(PinState.HIGH);
     }
 
     @Test
-    public void testDoorOperation() throws Exception
+    public void testDoorOperation()
     {
-        garageDoorService.doorOperation("1234");
-        verify(gpioPinDigitalOutput, times(2)).toggle();
+        MatcherAssert
+                .assertThat("Good KeyCode Entered.", garageDoorService.doorOperation(GOOD_KEYCODE),
+                        org.hamcrest.Matchers.is(true));
+        Mockito.verify(gpioPinDigitalOutput, Mockito.times(2)).toggle();
     }
 
-    @Test(expected = Exception.class)
-    public void testDoorOperationBadKeyCode() throws Exception
+    @Test
+    public void testDoorOperationBadKeyCode()
     {
-        garageDoorService.doorOperation("123");
-        verify(gpioPinDigitalOutput, never()).toggle();
+        MatcherAssert.assertThat(BAD_KEY_CODE_ENTERED, garageDoorService.doorOperation("123"),
+                org.hamcrest.Matchers.is(false));
+        Mockito.verify(gpioPinDigitalOutput, Mockito.never()).toggle();
     }
 
-    @Test(expected = Exception.class)
-    public void testDoorOperationNullKeyCode() throws Exception
+    @Test
+    public void testDoorOperationNullKeyCode()
     {
-        garageDoorService.doorOperation(null);
-        verify(gpioPinDigitalOutput, never()).toggle();
+        MatcherAssert.assertThat(BAD_KEY_CODE_ENTERED, garageDoorService.doorOperation(null),
+                org.hamcrest.Matchers.is(false));
+        Mockito.verify(gpioPinDigitalOutput, Mockito.never()).toggle();
     }
 }

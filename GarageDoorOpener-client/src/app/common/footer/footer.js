@@ -3,8 +3,8 @@ import 'angular-ui-router';
 import footerComponent from './footer.component';
 
 let footerModule = angular.module('footer', [
-	'ui.router'
+    'ui.router'
 ])
-.directive('appFooter', footerComponent);
+    .directive('appFooter', footerComponent);
 
 export default footerModule;
