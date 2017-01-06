@@ -1,6 +1,8 @@
 GarageDoorOpener
 ======
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8a331e855a0d40e88f7631cdfdb59920)](https://www.codacy.com/app/ndrone/HomeAutomation?utm_source=github.com&utm_medium=referral&utm_content=ndrone/HomeAutomation&utm_campaign=badger)
+
 Purpose
 -----------------
 The purpose of the is project was to allow me to have a playground to learn Angular JS, and cloud technologies. I needed
