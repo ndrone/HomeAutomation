@@ -4,18 +4,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.dronezone</groupId>
 	<artifactId>GarageDoorOpener-client</artifactId>
-	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>Garage Door Opener Client Module</name>
+
+    <parent>
+        <groupId>org.dronezone</groupId>
+        <artifactId>HomeAutomation</artifactId>
+        <version>${project.version}</version>
+        <relativePath>../</relativePath> <!-- lookup parent from repository -->
+    </parent>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				<version>0.0.26</version>
 				<executions>
 					<execution>
 						<id>install node and npm</id>
@@ -65,7 +69,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
 				<executions>
 					<execution>
 						<id>copy-resources</id>

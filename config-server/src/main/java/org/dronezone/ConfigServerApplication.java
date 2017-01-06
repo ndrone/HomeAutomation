@@ -3,18 +3,16 @@ package org.dronezone;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.config.server.EnableConfigServer;
 
-/**
- * Main entry point for the spring boot application
- *
- * @author Nicholas Drone
- * @since 1.0
- */
+@EnableConfigServer
 @EnableDiscoveryClient
 @SpringBootApplication
-public class GarageDoorOpenerApplication {
+public class ConfigServerApplication
+{
 
-    public static void main(String[] args) {
-        SpringApplication.run(GarageDoorOpenerApplication.class, args);
+    public static void main(String[] args)
+    {
+        SpringApplication.run(ConfigServerApplication.class, args);
     }
 }

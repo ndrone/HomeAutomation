@@ -1,21 +1,22 @@
-GarageDoorOpener
+Home Automation
 ======
 
-Purpose
------------------
-The purpose of the is project was to allow me to have a playground to learn Angular JS, and cloud technologies. I needed
-a garage door opener and found a use for my Raspberry Pi at the same time.
+Home Automation is a multi module project using several cloud projects, and other technologies, AngularJS, Spring Boot and more to come. Most of these projects are hosted on my Raspberry Pi's.
 
-Technologies Used
-------------------
-Angular JS client interface
-Spring Boot because I have small kids, and spinng up this entire application took less then an hour minus the front end.
-Pi4j to interface between spring boot and the Raspberry Pi.
-Mockito used to mock out the Pi4j portions unless your programming on the raspberry pi itself.
+Modules
+------
 
-Environment/Build
------------------
+Home Automation has the following modules:
 
-This application contains a [server](GarageDoorOpener-server/README.md) and a [client](GarageDoorOpener-client/README.md)
+  - ```config-server``` Configuration Server to have a single repository to abstract secret configurations.
+  - ```dashboard``` Module for a centralized knowledge of the entire ecosystem.
+  - ```eureka-server``` Registry Service for all modules. 
+  - ```GarageDoorOpener-client``` AngularJs project that is built with webpack into a jar and used with the server project
+  - ```GarageDoorOpener-server``` Spring boot project that uses Pi4J to leverage the GPIO's to a relay to trigger the garage door opener.
+  
+Building from Source
+----
 
-You must install [node](https://nodejs.org/)
+You need Java (1.8 or higher) and Maven 3.3.3
+
+```maven clean install```

@@ -4,19 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.dronezone</groupId>
-	<artifactId>GarageDoorOpener-parent</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<artifactId>HomeAutomation</artifactId>
+    <version>${project.version}</version>
 	<packaging>pom</packaging>
 
-	<name>GarageDoorOpener Parent</name>
-	<description>Project for Spring Boot</description>
+	<name>Home Automation</name>
+	<description>Project for all my home automation projects, and microservices</description>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 	<developers>
 		<developer>
 			<id>ndrone</id>
@@ -30,11 +24,81 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+        <spring-boot.version>1.4.3.RELEASE</spring-boot.version>
+        <spring-cloud.version>Camden.SR3</spring-cloud.version>
+        <project.version>1.1.0-SNAPSHOT</project.version>
 	</properties>
 
 	<modules>
+        <module>config-server</module>
+        <module>dashboard</module>
+        <module>eureka-server</module>
 		<module>GarageDoorOpener-client</module>
 		<module>GarageDoorOpener-server</module>
 	</modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.16</version>
+                    <configuration>
+                        <includes>
+                            <include>**/*Tests.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>pl.project13.maven</groupId>
+                    <artifactId>git-commit-id-plugin</artifactId>
+                    <version>2.2.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>1.5.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>0.0.26</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
 </project>

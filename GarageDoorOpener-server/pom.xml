@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>GarageDoorOpener-server</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>GarageDoorOpener Server Module</name>
@@ -12,14 +11,12 @@
 
 	<parent>
 		<groupId>org.dronezone</groupId>
-		<artifactId>GarageDoorOpener-parent</artifactId>
-		<version>1.0.4-SNAPSHOT</version>
+		<artifactId>HomeAutomation</artifactId>
+        <version>1.1.0-SNAPSHOT</version>
 		<relativePath>../</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
         <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
 	</properties>
 
@@ -43,7 +40,6 @@
 		<dependency>
 			<groupId>org.dronezone</groupId>
 			<artifactId>GarageDoorOpener-client</artifactId>
-			<version>1.0.0</version>
 		</dependency>
         <dependency>
             <groupId>com.pi4j</groupId>
@@ -68,27 +64,43 @@
         </dependency>
     </dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Brixton.SR4</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <executable>true</executable>
+                    <additionalProperties>
+                        <java.runtime.version>${java.runtime.version}</java.runtime.version>
+                        <spring.boot.version>${spring-boot.version}</spring.boot.version>
+                        <spring.cloud.version>${spring-cloud.version}</spring.cloud.version>
+                    </additionalProperties>
                 </configuration>
-			</plugin>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <configuration>
+                    <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -102,7 +114,6 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.2</version>
                 <executions>
                     <execution>
                         <id>generate-docs</id>
@@ -122,7 +133,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
