@@ -35,6 +35,7 @@ public class KeyCodeRestControllerTests
     @Test
     public void submitKeycode() throws Exception
     {
+        when(garageDoorService.doorOperation(anyString())).thenReturn(true);
         mockMvc.perform(post("/api/keycode/1234")).andExpect(status().isOk());
         verify(garageDoorService, times(1)).doorOperation("1234");
     }
@@ -42,8 +43,7 @@ public class KeyCodeRestControllerTests
     @Test
     public void keyCodeThrownException() throws Exception
     {
-        doThrow(Exception.class).when(garageDoorService).doorOperation("123");
-
+        when(garageDoorService.doorOperation(anyString())).thenReturn(false);
         mockMvc.perform(post("/api/keycode/123")).andExpect(status().isBadRequest());
         verify(garageDoorService, times(1)).doorOperation("123");
     }

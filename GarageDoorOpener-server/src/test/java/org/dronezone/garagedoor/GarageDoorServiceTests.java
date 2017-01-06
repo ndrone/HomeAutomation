@@ -4,6 +4,8 @@ import com.pi4j.io.gpio.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
@@ -12,7 +14,8 @@ import static org.mockito.Mockito.*;
  */
 public class GarageDoorServiceTests
 {
-    private static final int ACTION_PIN = 7;
+    private static final int    ACTION_PIN   = 7;
+    private static final  String GOOD_KEYCODE = "1234";
 
     private GarageDoorServiceImpl garageDoorService;
     private GpioPinDigitalOutput  gpioPinDigitalOutput;
@@ -26,7 +29,7 @@ public class GarageDoorServiceTests
                 .thenReturn(gpioPinDigitalOutput);
 
         GarageDoorProperties garageDoorProperties = new GarageDoorProperties();
-        garageDoorProperties.setKeycodeSecret("1234");
+        garageDoorProperties.setKeycodeSecret(GOOD_KEYCODE);
         garageDoorProperties.setActionPin(ACTION_PIN);
         garageDoorProperties.setActionPinState(PinState.HIGH);
         garageDoorService = new GarageDoorServiceImpl(garageDoorProperties, gpioController);
@@ -40,23 +43,24 @@ public class GarageDoorServiceTests
     }
 
     @Test
-    public void testDoorOperation() throws Exception
+    public void testDoorOperation()
     {
-        garageDoorService.doorOperation("1234");
+        assertThat("Good KeyCode Entered.", garageDoorService.doorOperation(GOOD_KEYCODE),
+                is(true));
         verify(gpioPinDigitalOutput, times(2)).toggle();
     }
 
-    @Test(expected = Exception.class)
-    public void testDoorOperationBadKeyCode() throws Exception
+    @Test
+    public void testDoorOperationBadKeyCode()
     {
-        garageDoorService.doorOperation("123");
+        assertThat("Bad KeyCode Entered.", garageDoorService.doorOperation("123"), is(false));
         verify(gpioPinDigitalOutput, never()).toggle();
     }
 
-    @Test(expected = Exception.class)
-    public void testDoorOperationNullKeyCode() throws Exception
+    @Test
+    public void testDoorOperationNullKeyCode()
     {
-        garageDoorService.doorOperation(null);
+        assertThat("Bad KeyCode Entered.", garageDoorService.doorOperation(null), is(false));
         verify(gpioPinDigitalOutput, never()).toggle();
     }
 }

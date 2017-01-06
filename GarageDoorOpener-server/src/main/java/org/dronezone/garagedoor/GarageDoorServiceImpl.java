@@ -15,8 +15,8 @@ public class GarageDoorServiceImpl implements GarageDoorService
 {
     private static final Logger log = LoggerFactory.getLogger(GarageDoorServiceImpl.class);
 
-    public static final int    SECOND             = 1000;
-    public static final String PIN_STATE_TOGGLING = "pin: {} state: {} toggling...";
+    private static final int    SECOND             = 1000;
+    private static final String PIN_STATE_TOGGLING = "pin: {} state: {} toggling...";
 
     private final String               keyCode;
     private final GpioPinDigitalOutput garageDoorPin;
@@ -44,31 +44,39 @@ public class GarageDoorServiceImpl implements GarageDoorService
         garageDoorPin.setShutdownOptions(true, pinState, PinPullResistance.OFF);
     }
 
-    public void doorOperation(String keyCode) throws IllegalAccessException, InterruptedException
+    public boolean doorOperation(String keyCode)
     {
+        boolean operation = false;
         log.info("interaction with garage door");
         if (this.keyCode.equals(keyCode))
         {
             log.debug("key code matches");
             //synchronized so more than one request isn't being fired at the same time.
-            synchronized (this)
-            {
-                log.debug(PIN_STATE_TOGGLING, garageDoorPin.getPin().getAddress(),
-                        garageDoorPin.getState().getValue());
-                garageDoorPin.toggle();
-                log.debug("pin: {} state: {} after toggling", garageDoorPin.getPin().getAddress(),
-                        garageDoorPin.getState().getValue());
-                Thread.sleep(SECOND);
-                log.debug(PIN_STATE_TOGGLING, garageDoorPin.getPin().getAddress(),
-                        garageDoorPin.getState().getValue());
-                garageDoorPin.toggle();
-                log.debug("pin: {} state: {}", garageDoorPin.getPin().getAddress(),
-                        garageDoorPin.getState().getValue());
-            }
+            doorOperation();
+            operation = true;
         }
-        else
+        return operation;
+    }
+
+    private synchronized void doorOperation()
+    {
+        log.debug(PIN_STATE_TOGGLING, garageDoorPin.getPin().getAddress(),
+                garageDoorPin.getState().getValue());
+        garageDoorPin.toggle();
+        log.debug("pin: {} state: {} after toggling", garageDoorPin.getPin().getAddress(),
+                garageDoorPin.getState().getValue());
+        try
         {
-            throw new IllegalAccessException("Invalid key code");
+            Thread.sleep(SECOND);
         }
+        catch (InterruptedException e)
+        {
+            log.error(e.getMessage(), e);
+        }
+        log.debug(PIN_STATE_TOGGLING, garageDoorPin.getPin().getAddress(),
+                garageDoorPin.getState().getValue());
+        garageDoorPin.toggle();
+        log.debug("pin: {} state: {}", garageDoorPin.getPin().getAddress(),
+                garageDoorPin.getState().getValue());
     }
 }
