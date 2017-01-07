@@ -11,7 +11,7 @@ before_install:
   - java -jar jpm4j.jar -u init
   - ~/jpm/bin/jpm install com.codacy:codacy-coverage-reporter:assembly
 
-script: mvn clean verify
+script: mvn clean post-integration-test -B -V
 
 after_success:
   - ~/jpm/bin/codacy-coverage-reporter -l Java -r target/site/corbertura/coverage.xml
