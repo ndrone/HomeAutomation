@@ -1,8 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var node_modules_dir = path.join(__dirname, 'node_modules');
-var vendor_dir = path.join(__dirname, 'src/app/vendor');
+var nodeModulesDir = path.join(__dirname, 'node_modules');
+var vendorDir = path.join(__dirname, 'src/app/vendor');
 
 // When you have a dep with a package.json that has a 'main' that points at a minified non-webpack friendly distribution
 // try adding it to the list here (relative to node_modules). See README for more information.
@@ -76,27 +76,27 @@ var config = {
             components: path.join(__dirname, 'src/app/components'),
 
             //Use preminified distributions to speed up production builds
-            'jquery': path.join(node_modules_dir, 'jquery/dist/jquery.min.js'),
-            'angular': path.join(node_modules_dir, 'angular/angular.min.js'),
-            'angular-ui-router': path.join(node_modules_dir, 'angular-ui-router/release/angular-ui-router.min.js'),
-            'angular-animate': path.join(node_modules_dir, 'angular-animate/angular-animate.min.js'),
-            'angular-ui-bootstrap': path.join(node_modules_dir, 'angular-ui-bootstrap/ui-bootstrap-tpls.min.js'),
-            'angular-breadcrumb': path.join(node_modules_dir, 'angular-breadcrumb/dist/angular-breadcrumb.min.js'),
-            'bootstrap': path.join(node_modules_dir, 'bootstrap/dist/js/bootstrap.min.js'),
-            'lodash': path.join(node_modules_dir, 'lodash/lodash.min.js')
+            'jquery': path.join(nodeModulesDir, 'jquery/dist/jquery.min.js'),
+            'angular': path.join(nodeModulesDir, 'angular/angular.min.js'),
+            'angular-ui-router': path.join(nodeModulesDir, 'angular-ui-router/release/angular-ui-router.min.js'),
+            'angular-animate': path.join(nodeModulesDir, 'angular-animate/angular-animate.min.js'),
+            'angular-ui-bootstrap': path.join(nodeModulesDir, 'angular-ui-bootstrap/ui-bootstrap-tpls.min.js'),
+            'angular-breadcrumb': path.join(nodeModulesDir, 'angular-breadcrumb/dist/angular-breadcrumb.min.js'),
+            'bootstrap': path.join(nodeModulesDir, 'bootstrap/dist/js/bootstrap.min.js'),
+            'lodash': path.join(nodeModulesDir, 'lodash/lodash.min.js')
         }
 
     }
 };
 
 deps.forEach(function (dep) {
-    var depPath = path.resolve(node_modules_dir, dep);
+    var depPath = path.resolve(nodeModulesDir, dep);
     config.resolve.alias[dep.split(path.sep)[0]] = depPath;
     config.module.noParse.push(depPath);
 });
 
 vendorDeps.forEach(function (dep) {
-    var depPath = path.resolve(vendor_dir, dep);
+    var depPath = path.resolve(vendorDir, dep);
     config.resolve.alias[dep.split(path.sep)[0]] = depPath;
     config.module.noParse.push(depPath);
 });

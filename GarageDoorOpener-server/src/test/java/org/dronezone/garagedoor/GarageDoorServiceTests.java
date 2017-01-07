@@ -14,8 +14,9 @@ import static org.mockito.Mockito.*;
  */
 public class GarageDoorServiceTests
 {
-    private static final int    ACTION_PIN   = 7;
+    private static final int ACTION_PIN = 7;
     private static final  String GOOD_KEYCODE = "1234";
+    private static final String BAD_KEY_CODE_ENTERED = "Bad KeyCode Entered.";
 
     private GarageDoorServiceImpl garageDoorService;
     private GpioPinDigitalOutput  gpioPinDigitalOutput;
@@ -53,14 +54,14 @@ public class GarageDoorServiceTests
     @Test
     public void testDoorOperationBadKeyCode()
     {
-        assertThat("Bad KeyCode Entered.", garageDoorService.doorOperation("123"), is(false));
+        assertThat(BAD_KEY_CODE_ENTERED, garageDoorService.doorOperation("123"), is(false));
         verify(gpioPinDigitalOutput, never()).toggle();
     }
 
     @Test
     public void testDoorOperationNullKeyCode()
     {
-        assertThat("Bad KeyCode Entered.", garageDoorService.doorOperation(null), is(false));
+        assertThat(BAD_KEY_CODE_ENTERED, garageDoorService.doorOperation(null), is(false));
         verify(gpioPinDigitalOutput, never()).toggle();
     }
 }
