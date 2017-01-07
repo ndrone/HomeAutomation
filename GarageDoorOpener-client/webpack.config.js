@@ -53,7 +53,7 @@ var config = {
             //kendo has some wierd ones that look like this KendoUIGlyphs.eot?-wd8xpd
             {test: /\.(ttf|eot|svg)(\?-)(.+)$/, loader: "file-loader?name=fonts/[name].[ext]"},
             {test: /\.woff(2)?(\?-)(.+)$/, loader: "file-loader?name=fonts/[name].[ext]"},
-            {test: /lodash\.min\.js$/, loader: 'expose?_'},
+            {test: /index\.js$/, loader: 'expose?_'},
             {test: /jquery\.min\.js$/, loader: 'expose?$!expose?jQuery!expose?window.jQuery'},
             {test: /angular\.min\.js/, loader: "expose?angular!exports?window.angular"},
             {test: /\.ico$/, loader: "file-loader?name=[name].[ext]"}
@@ -83,7 +83,7 @@ var config = {
             'angular-ui-bootstrap': path.join(nodeModulesDir, 'angular-ui-bootstrap/ui-bootstrap-tpls.min.js'),
             'angular-breadcrumb': path.join(nodeModulesDir, 'angular-breadcrumb/dist/angular-breadcrumb.min.js'),
             'bootstrap': path.join(nodeModulesDir, 'bootstrap/dist/js/bootstrap.min.js'),
-            'lodash': path.join(nodeModulesDir, 'lodash/lodash.min.js')
+            'lodash': path.join(nodeModulesDir, 'lodash/index.js')
         }
 
     }
