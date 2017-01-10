@@ -22,6 +22,8 @@ will need to add the below to the program argument list.
 
 `--CLIENT_HOME=${project.basedir}/test-client`
 
+If you are running locally without the files required by Pi4j and WiringPi on the filesystem make sure to use the `nopi` profile.
+
 *note that location needs to be the fully qualified location of the client project.
 
 This application contains a [client](GarageDoorOpener-client/README.md) as well.well

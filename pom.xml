@@ -82,6 +82,12 @@
                         <format>xml</format>
                     </formats>
                     <aggregate>true</aggregate>
+                    <instrumentation>
+                        <excludes>
+                            <exclude>org/dronezone/*Application.class</exclude>
+                            <exclude>org/dronezone/**/*Configuration.class</exclude>
+                        </excludes>
+                    </instrumentation>
                 </configuration>
                 <executions>
                     <execution>
