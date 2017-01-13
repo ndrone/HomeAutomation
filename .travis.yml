@@ -6,12 +6,13 @@ language: java
 jdk:
 - oraclejdk8
 
+sudo: required
 before_install:
-  - curl -sL https://github.com/jpm4j/jpm4j.installers/raw/master/dist/biz.aQute.jpm.run.jar >jpm4j.jar
-  - java -jar jpm4j.jar -u init
-  - ~/jpm/bin/jpm install com.codacy:codacy-coverage-reporter:assembly
+  - curl http://www.jpm4j.org/install/script > jpmInstall.sh
+  - sudo sh jpmInstall.sh
+  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
 
-script: mvn clean post-integration-test -B -V
+script: mvn clean post-integration-test -B
 
 after_success:
-  - ~/jpm/bin/codacy-coverage-reporter -l Java -r target/site/corbertura/coverage.xml
+  - codacy-coverage-reporter -l Java -r /home/travis/build/ndrone/HomeAutomation/target/site/cobertura/coverage.xml
