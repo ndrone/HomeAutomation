@@ -6,7 +6,7 @@
 
     <groupId>org.dronezone</groupId>
 	<artifactId>GarageDoorOpener-client</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.4</version>
 	<packaging>jar</packaging>
 	<name>Garage Door Opener Client Module</name>
 
