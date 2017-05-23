@@ -69,6 +69,8 @@
     "rimraf": "2.5.4",
     "run-sequence": "1.2.2",
     "sass-loader": "2.0.1",
+    "sinon": "1.17.6",
+    "sinon-chai": "^2.8.0",
     "style-loader": "0.12.4",
     "stylus-loader": "1.6.1",
     "webpack": "1.13.2",
