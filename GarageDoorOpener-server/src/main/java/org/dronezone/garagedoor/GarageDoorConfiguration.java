@@ -3,6 +3,7 @@ package org.dronezone.garagedoor;
 import com.pi4j.io.gpio.*;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,7 @@ import org.springframework.context.annotation.Profile;
 public class GarageDoorConfiguration
 {
     @Bean
-    @Profile("!nopi")
+    @ConditionalOnMissingBean(GarageDoorService.class)
     @RefreshScope
     public GarageDoorService garageDoorService(GarageDoorProperties garageDoorProperties)
     {
